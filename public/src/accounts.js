@@ -9,8 +9,12 @@ function sortAccountsByLastName(accounts) {
 }
 
 function getTotalNumberOfBorrows(account, books) {
-  const borrows = books.reduce((count, obj) => obj.id === account ? count++ : count, 0);
-  return borrows;
+
+  const accId = account.id;
+
+  let total = 0;
+  books.forEach(book => book.borrows.forEach(borrow => accId === borrow.id && total++));
+  return total;
 }
 
 function getBooksPossessedByAccount(account, books, authors) {}
