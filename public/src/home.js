@@ -38,8 +38,8 @@ function getMostCommonGenres(books) {
   let genres = [];
   for (let [key, value] of Object.entries(obj)) {
     genres.push({
-      'name':key,
-      'count':value
+      'name': key,
+      'count': value
     });
 
     genres.sort((genreA, genreB) => genreA.count > genreB.count ? -1 : 1);
@@ -47,7 +47,27 @@ function getMostCommonGenres(books) {
   return genres.slice(0, 5);
 }
 
-function getMostPopularBooks(books) {}
+function getMostPopularBooks(books) {
+  let obj = {};
+  books.forEach(book => {
+    if (obj[book.title]) {
+      obj[book.title] += book.borrows.length;
+    } else {
+      obj[book.title] = book.borrows.length;
+    }
+  });
+
+  let titles = [];
+  for (let [key, value] of Object.entries(obj)) {
+    titles.push({
+      'name': key,
+      'count': value
+    });
+
+    titles.sort((titleA, titleB) => titleA.count > titleB.count ? -1 : 1);
+  }
+  return titles.slice(0, 5);
+}
 
 function getMostPopularAuthors(books, authors) {}
 
